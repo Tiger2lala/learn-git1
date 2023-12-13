@@ -80,3 +80,27 @@ def makeHistogram(features):
 bins = 'fd'  # Freedman and Diaconis
 
 makeHistogram(worst_mean_se)
+
+def createHeatmap():
+    sns.set_theme(style ='white')
+    #Generate a mask for the upper triangular matrix
+    mask = np.triu(input_data.corr(), k = 0)
+
+    fig = plt.figure(figsize = (18, 18))
+    ax = fig.add_subplot()
+
+    # Generate a custom diverging palette of colours
+    cmap = sns.diverging_palette(230, 20, as_cmap = True)
+
+    sns.heatmap(data = input_data.corr(),
+                annot = True,
+                linewidths = 0.5,
+                fmt = '.1f',
+                ax = ax,
+                mask = mask,
+                cmap = cmap)
+
+    plt.title('A correlation heatmap of the features', fontsize = 20)
+    plt.show()
+
+createHeatmap()
